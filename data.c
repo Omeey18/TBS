@@ -61,16 +61,40 @@ void printList()
 void theaterList(char *movie_theater)
 {
     struct node *ptr = head;
+    int found_flag=0,choice=0,count=0;
+    char str_i[20];
     // start from the beginning
     while (ptr != NULL)
     {
         if(strcmp(movie_theater,ptr->movie_name)==0){
-            printf("Movie Name: %s\nTheater Name: %s\nTime Slots: %d\n", ptr->movie_name, ptr->theater_name, ptr->time_slots);
+            line();
+            count++;
+            printf("[%d]: Theater Name: %s\n",count, ptr->theater_name);
             printf("Total Seats: %d\nAvailable Seats: %d\nBooked Seats: %d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
             printf("\n");
+            found_flag=1;
+            line();
         }
-            ptr = ptr->next;
+            ptr = ptr->next;    
     }
+    while (1)
+    {
+        if(found_flag==1){
+            printf("Enter 1 to %d for theater select: ",count);
+            scanf("%d",&choice);
+            // fgets( str_i, 20, stdin);
+            // choice = strtol(str_i, NULL, 0);
+            if(choice<=count && choice>0){
+                break;
+            }else{
+                printf("Wrong Choice Try Again...!\n");
+            }
+        }else
+        {
+            break;
+        }
+    }
+    
 }
 // insert link at the first location
 void insertFirst(char *movie_name, char *theater_name, int time_slots, int total_seats, int avail_seat, int booked_seats)

@@ -9,5 +9,6 @@
 void printList();
 void insertFirst(char *movie_name, char *theater_name, int time_slots, int total_seats, int avail_seat, int booked_seats);
 void theaterList(char *movie_theater);
+void line();
 
 #endif //HEADER_H

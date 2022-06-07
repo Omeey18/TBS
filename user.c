@@ -19,22 +19,21 @@ int main()
     insertFirst("KGF", "INOX Adalaj", 4, 30, 30, 0);
     printList();
     int i;
-    char moviename[C_SIZE];
-    printf("Enter Movie name\n"
-    "1. RRR\n"
-    "2. KGF\n"
-    );
-    scanf(" %d",&i);
-    if(i==1){
-        strcpy(moviename,"RRR");
-    }
-    else if (i==2)
+    char moviename[4][C_SIZE]={"RRR","KGF","BHOOL BHULAIYAA 2","JURASSIC WORLD"};
+    char moviechoose[C_SIZE];
+    printf("Enter Movie name\n");
+    for(i=0;i<4;i++)
     {
-        strcpy(moviename,"KGF");
+    printf("%d: %s\n",i+1,moviename[i]);
     }
 
-    theaterList(moviename);
-    printf("\nDATA FOUND\n");
+        scanf("%1d",&i);
+        strcpy(moviechoose,moviename[i-1]);
+
+    
+
+    theaterList(moviechoose);
+    // printf("\nDATA FOUND\n");
 
     return 0;
 }

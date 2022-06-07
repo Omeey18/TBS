@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/ompatel/TBS'
+cc data.c user.c art.c -o final
+make: Leaving directory '/home/ompatel/TBS'
+ 
