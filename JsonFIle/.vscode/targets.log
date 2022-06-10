@@ -6,11 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 10 16:02:41 2022
+# Make data base, printed on Fri Jun 10 12:40:48 2022
 
 # Variables
 
-# 'override' directive
+# environment
 GNUMAKEFLAGS := 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
@@ -35,7 +35,7 @@ GDMSESSION = ubuntu
 # environment
 XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /home/ompatel/TBS
+CURDIR := /home/ompatel/Workspace/10-06-22/TBS/JsonFIle
 # makefile
 SHELL = /bin/sh
 # environment
@@ -43,11 +43,11 @@ VTE_VERSION = 5202
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 9:25203
+JOURNAL_STREAM = 9:25989
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
-# makefile
-MAKEFILE_LIST := 
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  makefile
 # automatic
 @F = $(notdir $@)
 # environment
@@ -59,19 +59,19 @@ MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=dc99be4db5fbe319c7e853ad62a3037b
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=5215fe27678269b687f6a1ed62a2ed07
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /usr/bin/code
 # environment
-MANAGERPID = 1228
+MANAGERPID = 1234
 # environment
 CLUTTER_IM_MODULE = xim
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-VSCODE_CWD = /home/ompatel/TBS
+VSCODE_CWD = /home/ompatel/Workspace/10-06-22/TBS/JsonFIle
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -79,7 +79,7 @@ PATH = /home/ompatel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bi
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Omeey:@/tmp/.ICE-unix/1259,unix/Omeey:/tmp/.ICE-unix/1259
+SESSION_MANAGER = local/Omeey:@/tmp/.ICE-unix/1265,unix/Omeey:/tmp/.ICE-unix/1265
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -91,7 +91,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = ac7460e5528942f694a288db9f471c68
+INVOCATION_ID = e2c3bedba1d94eb9bb74f8bafa9de6d6
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -109,11 +109,11 @@ GTK_IM_MODULE = ibus
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /home/ompatel/TBS
+PWD = /home/ompatel/Workspace/10-06-22/TBS/JsonFIle
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 1393
+SSH_AGENT_PID = 1395
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -159,7 +159,7 @@ SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-6a0be88e-1562-4e0d-ab5f-eec83b31429b.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-fa4e6577-2b1c-4ec9-a583-cbc35b279584.sock
 # environment
 XDG_SESSION_ID = 1
 # environment
@@ -209,11 +209,11 @@ DBUS_STARTER_BUS_TYPE = session
 # environment
 QT4_IM_MODULE = xim
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/5d6c4c89_ee8d_4779_a20d_d02f61d06f31
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/457edbce_dab5_4d2e_96b9_611ca2e3da99
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.2146
+GNOME_TERMINAL_SERVICE = :1.105
 # default
 SUFFIXES := 
 # environment
@@ -229,11 +229,11 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 6617
+VSCODE_PID = 2853
 # environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=dc99be4db5fbe319c7e853ad62a3037b
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=5215fe27678269b687f6a1ed62a2ed07
 # variable set hash-table stats:
-# Load=111/1024=11%, Rehash=0, Collisions=16/133=12%
+# Load=111/1024=11%, Rehash=0, Collisions=14/125=11%
 
 # Pattern-specific Variable Values
 
@@ -241,9 +241,9 @@ DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=dc99be4db5fbe319c7e853a
 
 # Directories
 
-# . (device 2049, inode 1967372): 7 files, no impossibilities.
+# . (device 2049, inode 1970169): 11 files, no impossibilities.
 
-# 7 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -254,54 +254,39 @@ DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=dc99be4db5fbe319c7e853a
 # Not a target:
 all:
 #  Command line target.
-#  Implicit rule search has been done.
-#  File does not exist.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
 makefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
-make: *** No rule to make target 'all'.  Stop.
-
-
-# Not a target:
-GNUmakefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# Load=4/1024=0%, Rehash=0, Collisions=0/5=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 125 B / avg = 8 B
-# current buf: size = 8162 B / used = 125 B / count = 15 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 16 / storage = 137 B / avg = 8 B
+ 
+makefile:4: *** empty variable name.  Stop.
 
-# strcache performance: lookups = 18 / hit rate = 16%
+# current buf: size = 8162 B / used = 137 B / count = 16 / avg = 8 B
+
+# strcache performance: lookups = 20 / hit rate = 20%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=1/18=6%
-# Finished Make data base on Fri Jun 10 16:02:41 2022
+# Load=16/8192=0%, Rehash=0, Collisions=1/20=5%
+# Finished Make data base on Fri Jun 10 12:40:48 2022
 
  

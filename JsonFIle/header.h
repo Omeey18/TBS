@@ -6,9 +6,9 @@
 ****************************************/
 #define C_SIZE 30
 /*function declaration.*/
+void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[],int n_booked);
 void printList();
-void insertFirst(char *movie_name, char *theater_name, int time_slots, int total_seats, int avail_seat, int booked_seats);
-void theaterList(char *movie_theater);
 void line();
+
 
 #endif //HEADER_H
