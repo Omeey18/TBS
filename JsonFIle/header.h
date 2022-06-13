@@ -9,6 +9,7 @@
 void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[],int n_booked);
 void printList();
 void line();
+void storeData();
 
 
 #endif //HEADER_H

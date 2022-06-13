@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <json-c/json.h>
 #include "header.h"
 
 struct node
@@ -36,7 +37,7 @@ void printList()
         printf("Screen: %d\n", ptr->screen);
         printf("Total Seats: %d\nAvailable Seats: %d\nBooked Seats: %d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
         // print showsheet
-        
+
         int design_count = 0;
         printf("\n");
         for (int index = 0; index < ptr->seat.total_seat; index++)
@@ -54,6 +55,50 @@ void printList()
     }
 }
 
+void storeData()
+{
+    struct node *ptr = head;
+
+    FILE *file;                       // file pointer
+    file = fopen("data.json", "w+"); // opening json file
+    char *buffer;                     // store string data
+
+    // Create an empty array : []
+    json_object *jarray = json_object_new_array();
+
+    // start from the beginning
+    while (ptr != NULL)
+    {
+
+        // create json object
+        json_object *parsed_json = json_object_new_object();
+        json_object *seats_array = json_object_new_array();
+        // storing data into json object
+        json_object_object_add(parsed_json, "moviename", json_object_new_string(ptr->movie_name));
+        json_object_object_add(parsed_json, "Screen", json_object_new_int(ptr->screen));
+        json_object_object_add(parsed_json, "t_seat", json_object_new_int(ptr->seat.total_seat));
+
+        // storing booked seats index
+        for (int index = 0; index < ptr->seat.total_seat; index++)//loop total seats
+        {
+            if (ptr->seat.show_seat[index] == 1)//if seat is book then store in json array
+            {
+                json_object_array_add(seats_array, json_object_new_int(index + 1));
+            }
+        }
+        //storing josn array into json object
+        json_object_object_add(parsed_json, "show_seat", seats_array);
+
+        json_object_array_add(jarray, parsed_json);
+        ptr = ptr->next;
+    }
+    // storing json object into string variable
+    buffer = json_object_to_json_string(jarray);
+    // printf("%s",buffer);
+    fprintf(file, "%s", buffer); // writing data into json file
+    // fwrite(buffer,1024,1,file);
+    fclose(file); // close file
+}
 // insert link at the first location
 void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[], int n_booked)
 {

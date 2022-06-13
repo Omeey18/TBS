@@ -72,5 +72,10 @@ int main()
     // printf("Data: %lu", index);
 
     printList(); // print all data
+
+
+
+    //writing all data to json again
+    storeData();    
     return 0;
 }
