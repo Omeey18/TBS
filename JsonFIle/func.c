@@ -35,7 +35,7 @@ void readData()
     file = fopen("data.json", "r"); // opening json file
 
     // VARIABLE
-    char buffer[1024]; // buffer
+    char buffer[5024]; // buffer
     // data for linked list
     char movie[C_SIZE];
     int scrn, Tseat, *seat_index;
@@ -48,15 +48,15 @@ void readData()
     struct json_object *t_seat;
     struct json_object *show_seats;
     struct json_object *seat_count;
-    size_t n_seats;
+    int n_seats;
     struct json_object *data;
 
     // read json file
-    fread(buffer, 1024, 1, file);
+    fread(buffer, 5024, 1, file);
     fclose(file); // close file
 
     parsed_json = json_tokener_parse(buffer);             // store all data into parsed json object
-    size_t index = json_object_array_length(parsed_json); // store number of json object in index
+    int index = json_object_array_length(parsed_json); // store number of json object in index
     total_movies = index;                                 // storing data into global variable
     // iterrating over all json object
     for (int i = 0; i < index; i++)
@@ -94,6 +94,7 @@ void readData()
         // push all data into linked list
         insertFirst(movie, scrn, Tseat, seat_index, n_seats);
     }
+    removeDuplicate();
 }
 
 // storing data into json file
@@ -239,7 +240,7 @@ int printMovies()
     return 0;
 }
 
-// It will print screens according to movie  
+// It will print screens according to movie
 void printScreen(char *choosed_movie)
 {
     struct node *ptr = head;
@@ -262,7 +263,7 @@ void printScreen(char *choosed_movie)
     display_seats(choosed_movie, screen_no);
 }
 
-//it will display seats according screen no...
+// it will display seats according screen no...
 int display_seats(char *choosed_movie, int screen_no)
 {
     struct node *ptr = head;
@@ -291,9 +292,38 @@ int display_seats(char *choosed_movie, int screen_no)
                 }
             }
             flag = 1;
-            if(ptr->seat.avail_seat<=0){
+            if (ptr->seat.avail_seat <= 0)
+            {
                 printf("No Seat available...!\n");
                 return 0;
+            }
+            int no_tickets_book = 0, seat_no = 0;
+            // booking tickets
+            printf("How many tickets you want to book\n");
+            scanf("%d", &no_tickets_book);
+
+            if (no_tickets_book > ptr->seat.avail_seat)
+            {
+                printf("Sorry Can't book\n");
+            }
+            else
+            {
+                for (int j = 0; j < no_tickets_book; j++)
+                {
+                    printf("Write seat no: \n");
+                    scanf("%d", &seat_no);
+
+                    if (ptr->seat.show_seat[seat_no - 1] != 0)
+                    {
+                        ptr->seat.show_seat[seat_no - 1] = 0;
+                        printf("Ticket Successfully booked...!\n");
+                    }
+                    else
+                    {
+                        j--;
+                        printf("Seat already booked...!\n");
+                    }
+                }
             }
         }
         ptr = ptr->next;
@@ -303,10 +333,25 @@ int display_seats(char *choosed_movie, int screen_no)
     {
         printf("No screen found...!\n");
     }
-
-
-
-    //booking tickets 
-    printf("How many tickets you want to book\n");
     return 0;
+}
+
+//removeDuplicate movies from stirng 
+void removeDuplicate()
+{
+    for (int i = 0; i < total_movies; i++)
+    {
+        int j = i + 1;
+        while (j < total_movies)
+        {
+            if (strcmp(movies_name[i], movies_name[j]) == 0)
+            {
+                memmove(movies_name[j], movies_name[total_movies - 1], sizeof(movies_name[0]));
+                --total_movies;
+            }
+            else
+                ++j;
+        }
+    }
+    printf("Total movies = %d\n", total_movies);
 }

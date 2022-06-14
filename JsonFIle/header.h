@@ -14,5 +14,6 @@ void readData();
 int printMovies();
 void printScreen(char *choosed_movie);
 int display_seats(char *choosed_movie, int screen_no);
+void removeDuplicate();
 
 #endif //HEADER_H

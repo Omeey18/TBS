@@ -1,5 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/ompatel/Workspace/10-06-22/TBS/JsonFIle'
-cc func.c user.c art.c -o final
-make: Leaving directory '/home/ompatel/Workspace/10-06-22/TBS/JsonFIle'
+make: Entering directory '/home/ompatel/temp/TBS-1/JsonFIle'
+cc func.c user.c art.c -ljson-c -o final
+make: Leaving directory '/home/ompatel/temp/TBS-1/JsonFIle'
  

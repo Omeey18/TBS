@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun 13 17:18:52 2022
+# Make data base, printed on Tue Jun 14 12:52:18 2022
 
 # Variables
 
@@ -45,7 +45,7 @@ VTE_VERSION = 5202
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 9:26331
+JOURNAL_STREAM = 9:27368
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile
@@ -61,13 +61,13 @@ MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=1aafc9cf036566f6dc8f88d562a6f686
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=9fa6cf84d66910964107486862a810ed
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /usr/bin/code
 # environment
-MANAGERPID = 1229
+MANAGERPID = 1819
 # environment
 CLUTTER_IM_MODULE = xim
 # environment
@@ -81,7 +81,7 @@ PATH = /home/ompatel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bi
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Omeey:@/tmp/.ICE-unix/9351,unix/Omeey:/tmp/.ICE-unix/9351
+SESSION_MANAGER = local/Omeey:@/tmp/.ICE-unix/1850,unix/Omeey:/tmp/.ICE-unix/1850
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -93,7 +93,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 662f790733804118a0e9dd1facd6db63
+INVOCATION_ID = d2f274caa429458f958502b55cb90637
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -115,7 +115,7 @@ PWD = /home/ompatel/TBS
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 1399
+SSH_AGENT_PID = 1983
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -145,7 +145,7 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-XDG_VTNR = 2
+XDG_VTNR = 1
 # environment
 MAKELEVEL := 0
 # environment
@@ -161,9 +161,9 @@ SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b871054f-5d3d-4779-bce5-8b8111fbea40.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2526f270-a0a6-404c-81e2-bb5121bf9b65.sock
 # environment
-XDG_SESSION_ID = 7
+XDG_SESSION_ID = 1
 # environment
 USER = ompatel
 # makefile
@@ -172,6 +172,8 @@ USER = ompatel
 XDG_CURRENT_DESKTOP = Unity
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
+# environment
+ZEITGEIST_DATA_PATH = /home/ompatel/.local/share/zeitgeist
 # default
 MAKE_COMMAND := make
 # default
@@ -211,17 +213,17 @@ DBUS_STARTER_BUS_TYPE = session
 # environment
 QT4_IM_MODULE = xim
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/eef62137_717a_4573_a96f_6b6cd27d5eda
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/cee644be_2937_458f_ba1a_b74b82e5aaa1
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.1605
+GNOME_TERMINAL_SERVICE = :1.2130
 # default
 SUFFIXES := 
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
-WINDOWPATH = 2
+WINDOWPATH = 1
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # default
@@ -231,11 +233,11 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 10218
+VSCODE_PID = 21651
 # environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=1aafc9cf036566f6dc8f88d562a6f686
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=9fa6cf84d66910964107486862a810ed
 # variable set hash-table stats:
-# Load=111/1024=11%, Rehash=0, Collisions=16/133=12%
+# Load=112/1024=11%, Rehash=0, Collisions=16/134=12%
 
 # Pattern-specific Variable Values
 
@@ -279,9 +281,9 @@ makefile:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 
 # Not a target:
+ 
 GNUmakefile:
 #  Implicit rule search has been done.
 #  File does not exist.
@@ -302,6 +304,6 @@ GNUmakefile:
 # strcache performance: lookups = 18 / hit rate = 16%
 # hash-table stats:
 # Load=15/8192=0%, Rehash=0, Collisions=1/18=6%
-# Finished Make data base on Mon Jun 13 17:18:52 2022
+# Finished Make data base on Tue Jun 14 12:52:18 2022
 
  
