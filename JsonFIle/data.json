@@ -36,7 +36,9 @@
             2,
             3,
             6,
-            10
+            10,
+            15,
+            24
         ]
     },
     {
@@ -55,9 +57,7 @@
         "moviename": "BHOOL BHULAIYAA",
         "Screen": 5,
         "t_seat": 40,
-        "show_seat": [
-           
-        ]
+        "show_seat": []
     },
     {
         "moviename": "BHOOL BHULAIYAA",

@@ -55,9 +55,9 @@ void readData()
     fread(buffer, 5024, 1, file);
     fclose(file); // close file
 
-    parsed_json = json_tokener_parse(buffer);             // store all data into parsed json object
+    parsed_json = json_tokener_parse(buffer);          // store all data into parsed json object
     int index = json_object_array_length(parsed_json); // store number of json object in index
-    total_movies = index;                                 // storing data into global variable
+    total_movies = index;                              // storing data into global variable
     // iterrating over all json object
     for (int i = 0; i < index; i++)
     {
@@ -284,13 +284,23 @@ int display_seats(char *choosed_movie, int screen_no)
             for (int index = 0; index < ptr->seat.total_seat; index++)
             {
                 design_count++;
-                printf("%d\t", ptr->seat.show_seat[index]);
+                if (ptr->seat.show_seat[index] == 0)
+                {
+                    setRedColor();
+                    printf("%d\t", ptr->seat.show_seat[index]);
+                }
+                else
+                {
+                    setGreenColor();
+                    printf("%d\t", ptr->seat.show_seat[index]);
+                }
                 if (design_count == 10)
                 {
                     printf("\n\n");
                     design_count = 0;
                 }
             }
+            setDefaultColor();
             flag = 1;
             if (ptr->seat.avail_seat <= 0)
             {
@@ -336,7 +346,7 @@ int display_seats(char *choosed_movie, int screen_no)
     return 0;
 }
 
-//removeDuplicate movies from stirng 
+// removeDuplicate movies from stirng
 void removeDuplicate()
 {
     for (int i = 0; i < total_movies; i++)
