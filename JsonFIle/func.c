@@ -1,12 +1,22 @@
+/***************************************
+ * HEADER FILE
+ ****************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <json-c/json.h>
 #include "header.h"
 
+/***************************************
+ * GLOBAL VARIABLES
+ ****************************************/
 int total_movies;
 char movies_name[C_SIZE][C_SIZE];
 
+/**
+ * @brief LINKEDLIST NODE
+ *
+ */
 struct node
 {
     char movie_name[C_SIZE];
@@ -28,6 +38,10 @@ struct node *head = NULL;
 struct node *current = NULL;
 
 // reading data from json file
+/**
+ * @brief This function will read data from JSON file and insert data in linked list
+ *
+ */
 void readData()
 {
     // read data from csv
@@ -98,6 +112,10 @@ void readData()
 }
 
 // storing data into json file
+/**
+ * @brief This function will store all data of linked list in JSON file
+ *
+ */
 void storeData()
 {
     struct node *ptr = head;
@@ -142,7 +160,10 @@ void storeData()
     fclose(file); // close file
 }
 
-// display the list
+/**
+ * @brief This function will print all data of linked list 
+ * 
+ */
 void printList()
 {
     struct node *ptr = head;
@@ -173,7 +194,16 @@ void printList()
         printf("\n");
     }
 }
-// insert link at the first location
+
+/**
+ * @brief This function will insert data into linked list 
+ * 
+ * @param movie_name 
+ * @param screen 
+ * @param total_seats 
+ * @param seats_index 
+ * @param n_booked 
+ */
 void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[], int n_booked)
 {
     // create a link
@@ -202,6 +232,12 @@ void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[
     head = link;
 }
 
+/**
+ * @brief This will orint all movies list and
+ *  ask for select one movie and call printScreen function
+ * 
+ * @return int 
+ */
 int printMovies()
 {
     int movie_count = 0, movie_choice = 0;
@@ -240,7 +276,12 @@ int printMovies()
     return 0;
 }
 
-// It will print screens according to movie
+/**
+ * @brief This function will print screens according to movie and
+ * ask to select one screen number form user and call display_seat function
+ * 
+ * @param choosed_movie 
+ */
 void printScreen(char *choosed_movie)
 {
     struct node *ptr = head;
@@ -250,7 +291,7 @@ void printScreen(char *choosed_movie)
         if (strcmp(choosed_movie, ptr->movie_name) == 0)
         {
             line();
-            printf("Screen: %d\n", ptr->screen);
+            printf("Screen No.: %d\n", ptr->screen);
             printf("Total Seats: %d\nAvailable Seats: %d\nBooked Seats: %d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
         }
 
@@ -263,14 +304,21 @@ void printScreen(char *choosed_movie)
     display_seats(choosed_movie, screen_no);
 }
 
-// it will display seats according screen no...
+
+/**
+ * @brief This function will display seats according to screen no 
+ * and ask from user to book seats 
+ * 
+ * @param choosed_movie 
+ * @param screen_no 
+ * @return int 
+ */
 int display_seats(char *choosed_movie, int screen_no)
 {
     struct node *ptr = head;
     int flag = 0;
     // start from the beginning
     // print showsheet
-
     line();
     while (ptr != NULL)
     {
@@ -346,7 +394,10 @@ int display_seats(char *choosed_movie, int screen_no)
     return 0;
 }
 
-// removeDuplicate movies from stirng
+/**
+ * @brief this funcation will remove duplicated moives names from char 2d array 
+ * 
+ */
 void removeDuplicate()
 {
     for (int i = 0; i < total_movies; i++)

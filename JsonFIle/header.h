@@ -5,6 +5,12 @@
 * MACROS
 ****************************************/
 #define C_SIZE 30
+
+
+
+/***************************************
+* FUNCTION DECLARATION
+****************************************/
 /*function declaration.*/
 void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[],int n_booked);
 void printList();
