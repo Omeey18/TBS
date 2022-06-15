@@ -4,6 +4,6 @@
 $(CC) = gcc 
 
 final:
-		$(CC) admin.c user.c -o final
+		$(CC) data.c user.c art.c -o final
 clean:
-		rm  *.o final
+		rm final
