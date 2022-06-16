@@ -49,7 +49,7 @@ void readData()
     file = fopen("data.json", "r"); // opening json file
 
     // VARIABLE
-    char buffer[5024]; // buffer
+    char buffer[READERSIZE]; // buffer
     // data for linked list
     char movie[C_SIZE];
     int scrn, Tseat, *seat_index;
@@ -66,7 +66,7 @@ void readData()
     struct json_object *data;
 
     // read json file
-    fread(buffer, 5024, 1, file);
+    fread(buffer, READERSIZE, 1, file);
     fclose(file); // close file
 
     parsed_json = json_tokener_parse(buffer);          // store all data into parsed json object
@@ -256,7 +256,8 @@ int printMovies()
         while (1)
         {
             /* code */
-            scanf("%1d", &movie_choice);
+            scanf("%d", &movie_choice);
+            getchar();
             if (movie_choice > 0 && movie_choice <= movie_count)
             {
                 strcpy(choosed_movie, movies_name[movie_choice - 1]);
@@ -268,7 +269,7 @@ int printMovies()
     }
     else
     {
-        printf("No Moives available\n");
+        printf("No Movies available\n");
         return 0;
     }
     // printf("Choosed Movie is: %s\n",choosed_movie);
@@ -371,12 +372,16 @@ int display_seats(char *choosed_movie, int screen_no)
                     printf("Write seat no: \n");
                     scanf("%d", &seat_no);
 
-                    if (ptr->seat.show_seat[seat_no - 1] != 0)
+                    if(ptr->seat.total_seat<seat_no){
+                        j--;
+                        printf("Seat not found...!\n");
+                    }
+                    else if (ptr->seat.show_seat[seat_no - 1] != 0)
                     {
                         ptr->seat.show_seat[seat_no - 1] = 0;
                         printf("Ticket Successfully booked...!\n");
                     }
-                    else
+                    else if(ptr->seat.show_seat[seat_no - 1] == 0)
                     {
                         j--;
                         printf("Seat already booked...!\n");
@@ -416,3 +421,4 @@ void removeDuplicate()
     }
     printf("Total movies = %d\n", total_movies);
 }
+

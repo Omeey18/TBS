@@ -5,8 +5,7 @@
 * MACROS
 ****************************************/
 #define C_SIZE 30
-
-
+#define READERSIZE 5024
 
 /***************************************
 * FUNCTION DECLARATION
