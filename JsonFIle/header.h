@@ -15,10 +15,13 @@ void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[
 void printList();
 void storeData();
 void readData();
-int printMovies();
+char *printMovies();
 void printScreen(char *choosed_movie);
 int display_seats(char *choosed_movie, int screen_no);
 void removeDuplicate();
+int adminWork();
+int resetAllSeats();
+int resetSeats();
 
 void line();
 void setBlueColor();

@@ -161,8 +161,8 @@ void storeData()
 }
 
 /**
- * @brief This function will print all data of linked list 
- * 
+ * @brief This function will print all data of linked list
+ *
  */
 void printList()
 {
@@ -171,13 +171,12 @@ void printList()
     while (ptr != NULL)
     {
         line();
-        printf("Movie Name: %s\n", ptr->movie_name);
+        printf("\t\t\tMovie Name: \t%s\n", ptr->movie_name);
         line();
-        printf("Screen: %d\n", ptr->screen);
-        printf("Total Seats: %d\nAvailable Seats: %d\nBooked Seats: %d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
+        printf("\t\t\tScreen: \t%d\n", ptr->screen);
+        printf("\t\t\tTotal Seats: \t%d\n\t\t\tAvail Seats: \t%d\n\t\t\tBooked Seats: \t%d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
 
         // print showsheet
-
         int design_count = 0;
         printf("\n");
         for (int index = 0; index < ptr->seat.total_seat; index++)
@@ -196,13 +195,13 @@ void printList()
 }
 
 /**
- * @brief This function will insert data into linked list 
- * 
- * @param movie_name 
- * @param screen 
- * @param total_seats 
- * @param seats_index 
- * @param n_booked 
+ * @brief This function will insert data into linked list
+ *
+ * @param movie_name
+ * @param screen
+ * @param total_seats
+ * @param seats_index
+ * @param n_booked
  */
 void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[], int n_booked)
 {
@@ -235,13 +234,13 @@ void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[
 /**
  * @brief This will orint all movies list and
  *  ask for select one movie and call printScreen function
- * 
- * @return int 
+ *
+ * @return int
  */
-int printMovies()
+char *printMovies()
 {
     int movie_count = 0, movie_choice = 0;
-    char choosed_movie[C_SIZE];
+    char *choosed_movie[C_SIZE];
     for (int i = 0; i < total_movies; i++)
     {
         line();
@@ -260,7 +259,8 @@ int printMovies()
             getchar();
             if (movie_choice > 0 && movie_choice <= movie_count)
             {
-                strcpy(choosed_movie, movies_name[movie_choice - 1]);
+                // strcpy(*choosed_movie, movies_name[movie_choice - 1]);
+                *choosed_movie = movies_name[movie_choice - 1];
                 break;
             }
             else
@@ -273,15 +273,14 @@ int printMovies()
         return 0;
     }
     // printf("Choosed Movie is: %s\n",choosed_movie);
-    printScreen(choosed_movie);
-    return 0;
+    return *choosed_movie;
 }
 
 /**
  * @brief This function will print screens according to movie and
  * ask to select one screen number form user and call display_seat function
- * 
- * @param choosed_movie 
+ *
+ * @param choosed_movie
  */
 void printScreen(char *choosed_movie)
 {
@@ -305,14 +304,13 @@ void printScreen(char *choosed_movie)
     display_seats(choosed_movie, screen_no);
 }
 
-
 /**
- * @brief This function will display seats according to screen no 
- * and ask from user to book seats 
- * 
- * @param choosed_movie 
- * @param screen_no 
- * @return int 
+ * @brief This function will display seats according to screen no
+ * and ask from user to book seats
+ *
+ * @param choosed_movie
+ * @param screen_no
+ * @return int
  */
 int display_seats(char *choosed_movie, int screen_no)
 {
@@ -357,36 +355,52 @@ int display_seats(char *choosed_movie, int screen_no)
                 return 0;
             }
             int no_tickets_book = 0, seat_no = 0;
-            // booking tickets
-            printf("How many tickets you want to book\n");
-            scanf("%d", &no_tickets_book);
 
-            if (no_tickets_book > ptr->seat.avail_seat)
+            // ask to book tickets
+            printf("DO want to book seats [Y/N]:");
+            char check;
+            scanf(" %c", &check);
+            line();
+            if (check == 'Y' || check == 'y')
             {
-                printf("Sorry Can't book\n");
+                // booking tickets
+                printf("How many tickets you want to book\n");
+                scanf("%d", &no_tickets_book);
+
+                if (no_tickets_book > ptr->seat.avail_seat)
+                {
+                    printf("Sorry Can't book\n");
+                }
+                else
+                {
+                    for (int j = 0; j < no_tickets_book; j++)
+                    {
+                        printf("Write seat no: \n");
+                        scanf("%d", &seat_no);
+
+                        if (ptr->seat.total_seat < seat_no)
+                        {
+                            j--;
+                            printf("Seat not found...!\n");
+                        }
+                        else if (ptr->seat.show_seat[seat_no - 1] != 0)
+                        {
+                            ptr->seat.show_seat[seat_no - 1] = 0;
+                            setGreenColor();
+                            printf("Ticket Successfully booked...!\n");
+                            setDefaultColor();
+                        }
+                        else if (ptr->seat.show_seat[seat_no - 1] == 0)
+                        {
+                            j--;
+                            printf("Seat already booked...!\n");
+                        }
+                    }
+                }
             }
             else
             {
-                for (int j = 0; j < no_tickets_book; j++)
-                {
-                    printf("Write seat no: \n");
-                    scanf("%d", &seat_no);
-
-                    if(ptr->seat.total_seat<seat_no){
-                        j--;
-                        printf("Seat not found...!\n");
-                    }
-                    else if (ptr->seat.show_seat[seat_no - 1] != 0)
-                    {
-                        ptr->seat.show_seat[seat_no - 1] = 0;
-                        printf("Ticket Successfully booked...!\n");
-                    }
-                    else if(ptr->seat.show_seat[seat_no - 1] == 0)
-                    {
-                        j--;
-                        printf("Seat already booked...!\n");
-                    }
-                }
+                printMovies();
             }
         }
         ptr = ptr->next;
@@ -400,8 +414,8 @@ int display_seats(char *choosed_movie, int screen_no)
 }
 
 /**
- * @brief this funcation will remove duplicated moives names from char 2d array 
- * 
+ * @brief this funcation will remove duplicated moives names from char 2d array
+ *
  */
 void removeDuplicate()
 {
@@ -419,6 +433,138 @@ void removeDuplicate()
                 ++j;
         }
     }
-    printf("Total movies = %d\n", total_movies);
+    // printf("Total movies = %d\n", total_movies);
 }
+
+/**
+ * @brief It has some feature like add data, remove sits and print all data
+ * 
+ * @return int 
+ */
+int adminWork()
+{
+    char pass[C_SIZE] = {"admin"};
+    char user_pass[C_SIZE] = "";
+    printf("Enter password: ");
+
+    scanf(" %[^\n]s", user_pass);
+    // printf("%s %s\n",pass,user_pass);
+    if (strcmp(pass, user_pass) == 0)
+    {
+        setGreenColor();
+        printf("Success\n");
+        setDefaultColor();
+        while (1)
+        {
+            // login successfully
+            int admin_ch;
+            line();
+            printf("[+] 1 for reset all seats data:\n[+] 2 for reset particular seats data:\n[+] 3 for print all data:\n[+] 4 for Add new Data:\n[+] 5 for exit:");
+            scanf("%d", &admin_ch);
+            getchar();
+            switch (admin_ch)
+            {
+            case 1:
+                /* code */
+                resetAllSeats();
+                break;
+            case 2:
+                /* code */
+                resetSeats();
+                break;
+            case 3:
+                /* code */
+                printList();
+                break;
+            case 4:
+                /* code */
+                printf("Adding new data\n");
+                break;
+            case 5:
+                /* code */
+                setRedColor();
+                printf("signing off from Admin pannel\n");
+                setDefaultColor();
+                return 0;
+            default:
+                printf("Wrong choice...!");
+                break;
+            }
+        }
+    }
+    else
+    {
+        // login failed
+        setRedColor();
+        printf("Wrong Password\n");
+        setDefaultColor();
+        return 0;
+    }
+    return 0;
+}
+
+
+/**
+ * @brief it will reset all seats of all moives
+ * 
+ * @return int 
+ */
+int resetAllSeats()
+{
+    struct node *ptr = head;
+    // start from the beginning
+    while (ptr != NULL)
+    {
+
+        ptr->seat.avail_seat = ptr->seat.total_seat;
+        ptr->seat.booked_seat = 0;
+        for (int index = 0; index < ptr->seat.total_seat; index++)
+        {
+            ptr->seat.show_seat[index] = index + 1;
+        }
+        ptr = ptr->next;
+    }
+    printf("Data reset Successfully...!\n");
+}
+
+/**
+ * @brief It will reset all seat of particular movie
+ * 
+ * 
+ * @return int 
+ */
+int resetSeats()
+{
+    struct node *ptr = head;
+    char *movie = printMovies();
+    int sn, flag = 0;
+    printf("Enter Screen No: ");
+    scanf("%d", &sn);
+    // start from the beginning
+    while (ptr != NULL)
+    {
+        // printf("%s %s\n",ptr->movie_name,movie);
+        if (strcmp(ptr->movie_name,movie)==0 && ptr->screen == sn)
+        {
+            ptr->seat.avail_seat = ptr->seat.total_seat;
+            ptr->seat.booked_seat = 0;
+            for (int index = 0; index < ptr->seat.total_seat; index++)
+            {
+                ptr->seat.show_seat[index] = index + 1;
+            }
+            flag = 1;
+        }
+        ptr = ptr->next;
+    }
+
+    if (flag == 0)
+    {
+        printf("Data not found\n");
+    }
+    else if (flag == 1)
+    {
+        printf("Data reset Successfully...!\n");
+    }
+}
+
 
