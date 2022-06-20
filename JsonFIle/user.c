@@ -12,15 +12,14 @@
  * HEADER FILES
  ****************************************/
 #include <stdio.h>
-#include<string.h>
+#include <string.h>
 #include "header.h"
 
 /***************************************
  * MAIN FUNCTION
  ****************************************/
-int main()
+int init()
 {
-    readData(); // reading data form json
 
     while (1)
     {
@@ -32,26 +31,26 @@ int main()
         getchar();
         printf("\n");
         line();
-        //choosing user, admin or exit 
+        // choosing user, admin or exit
         switch (user_admin_ch)
         {
-        //admin pannel    
+        // admin pannel
         case 1:
             /* code */
             printf("YOu are in admin panel\n");
             adminWork();
             break;
-        
-        //user pannel
+
+        // user pannel
         case 2:
             /* code */
             printf("YOu are in user panel\n");
-            char movie[C_SIZE]={}; 
-            strcpy(movie,printMovies()); // print all movie name
+            char movie[C_SIZE] = {};
+            strcpy(movie, printMovies()); // print all movie name
             printScreen(movie);
             break;
 
-        //exit form code
+        // exit form code
         case 3:
             /* code */
             // writing all data to json again
@@ -65,5 +64,11 @@ int main()
 
         // printList(); // print all data
     }
+}
+
+int main()
+{
+    readData(); // reading data form json
+    init();
     return 0;
 }

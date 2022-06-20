@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <json-c/json.h>
+#include <stdbool.h>
 #include "header.h"
 
 /***************************************
@@ -207,7 +208,6 @@ void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[
 {
     // create a link
     struct node *link = (struct node *)malloc(sizeof(struct node));
-
     strcpy(link->movie_name, movie_name);
     link->screen = screen;
     link->seat.avail_seat = total_seats - n_booked;
@@ -400,7 +400,7 @@ int display_seats(char *choosed_movie, int screen_no)
             }
             else
             {
-                printMovies();
+                init();
             }
         }
         ptr = ptr->next;
@@ -438,8 +438,8 @@ void removeDuplicate()
 
 /**
  * @brief It has some feature like add data, remove sits and print all data
- * 
- * @return int 
+ *
+ * @return int
  */
 int adminWork()
 {
@@ -479,11 +479,12 @@ int adminWork()
             case 4:
                 /* code */
                 printf("Adding new data\n");
+                getData();
                 break;
             case 5:
                 /* code */
                 setRedColor();
-                printf("signing off from Admin pannel\n");
+                printf("Signing off from Admin pannel\n");
                 setDefaultColor();
                 return 0;
             default:
@@ -503,11 +504,10 @@ int adminWork()
     return 0;
 }
 
-
 /**
  * @brief it will reset all seats of all moives
- * 
- * @return int 
+ *
+ * @return int
  */
 int resetAllSeats()
 {
@@ -529,9 +529,9 @@ int resetAllSeats()
 
 /**
  * @brief It will reset all seat of particular movie
- * 
- * 
- * @return int 
+ *
+ *
+ * @return int
  */
 int resetSeats()
 {
@@ -544,7 +544,7 @@ int resetSeats()
     while (ptr != NULL)
     {
         // printf("%s %s\n",ptr->movie_name,movie);
-        if (strcmp(ptr->movie_name,movie)==0 && ptr->screen == sn)
+        if (strcmp(ptr->movie_name, movie) == 0 && ptr->screen == sn)
         {
             ptr->seat.avail_seat = ptr->seat.total_seat;
             ptr->seat.booked_seat = 0;
@@ -567,4 +567,60 @@ int resetSeats()
     }
 }
 
+int getData()
+{
 
+    char movie_n[C_SIZE];
+    int scrn, t_seats, t_booked;
+    printf("Enter new movie name: ");
+    scanf(" %[^\n]s", movie_n);
+    printf("Enter screen no: ");
+    scanf("%d", &scrn);
+    printf("Enter total seats: ");
+    scanf("%d", &t_seats);
+
+    insertFirst(movie_n, scrn, t_seats, 0, 0);
+    storeData();
+
+    while (!isEmpty())
+    {
+        struct node *temp = deleteFirst();
+    }
+
+    readData();
+    printf("Data inserted\n");
+    return 0;
+}
+
+// delete first item
+struct node *deleteFirst()
+{
+
+    // save reference to first link
+    struct node *tempLink = head;
+
+    // mark next to first link as first
+    head = head->next;
+
+    // return the deleted link
+    return tempLink;
+}
+
+// is list empty
+bool isEmpty()
+{
+    return head == NULL;
+}
+
+// void freeList()
+// {
+//    struct node* tmp = head, *ptr;
+
+//    while (NULL != tmp)
+//     {
+//        ptr = tmp->next;
+//        free(tmp);
+//        tmp = ptr;
+//     }
+
+// }

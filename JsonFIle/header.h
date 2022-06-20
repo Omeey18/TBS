@@ -1,5 +1,6 @@
 #ifndef HEADER_H
 #define HEADER_H
+#include <stdbool.h>
 
 /***************************************
 * MACROS
@@ -22,6 +23,9 @@ void removeDuplicate();
 int adminWork();
 int resetAllSeats();
 int resetSeats();
+int getData();
+struct node* deleteFirst();
+bool isEmpty();
 
 void line();
 void setBlueColor();
@@ -29,5 +33,6 @@ void setDefaultColor();
 void setRedColor();
 void setGreenColor();
 
+int init();
 
 #endif //HEADER_H
