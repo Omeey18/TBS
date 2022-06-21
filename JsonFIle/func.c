@@ -123,7 +123,7 @@ void storeData()
 
     FILE *file;                      // file pointer
     file = fopen("data.json", "w+"); // opening json file
-    char *buffer;                    // store string data
+    char buffer[READERSIZE];                    // store string data
 
     // Create an empty array : []
     json_object *jarray = json_object_new_array();
@@ -154,7 +154,7 @@ void storeData()
         ptr = ptr->next;
     }
     // storing json object into string variable
-    buffer = json_object_to_json_string(jarray);
+    strcpy(buffer,json_object_to_json_string(jarray));
     // printf("%s",buffer);
     fprintf(file, "%s", buffer); // writing data into json file
     // fwrite(buffer,1024,1,file);
@@ -388,6 +388,8 @@ int display_seats(char *choosed_movie, int screen_no)
                             ptr->seat.show_seat[seat_no - 1] = 0;
                             setGreenColor();
                             printf("Ticket Successfully booked...!\n");
+                            ptr->seat.avail_seat--;
+                            ptr->seat.booked_seat++;
                             setDefaultColor();
                         }
                         else if (ptr->seat.show_seat[seat_no - 1] == 0)
@@ -400,7 +402,7 @@ int display_seats(char *choosed_movie, int screen_no)
             }
             else
             {
-                init();
+                return 0;
             }
         }
         ptr = ptr->next;
@@ -479,7 +481,7 @@ int adminWork()
             case 4:
                 /* code */
                 printf("Adding new data\n");
-                getData();
+                addData();
                 break;
             case 5:
                 /* code */
@@ -505,7 +507,7 @@ int adminWork()
 }
 
 /**
- * @brief it will reset all seats of all moives
+ * @brief it will reset all seats of all movies
  *
  * @return int
  */
@@ -567,11 +569,18 @@ int resetSeats()
     }
 }
 
-int getData()
+/**
+ * @brief add the Data object
+ * 
+ * @return int 
+ */
+int addData()
 {
-
+    /* local temp variables */
     char movie_n[C_SIZE];
     int scrn, t_seats, t_booked;
+
+    /* geting values from user*/
     printf("Enter new movie name: ");
     scanf(" %[^\n]s", movie_n);
     printf("Enter screen no: ");
@@ -579,15 +588,15 @@ int getData()
     printf("Enter total seats: ");
     scanf("%d", &t_seats);
 
+    /* updating global variables */
+    strcpy(movies_name[total_movies],movie_n);
+    total_movies++;
+    removeDuplicate();/*removing duplicates movie name from global vari */
+
+    /* inserting data into Linked List */
     insertFirst(movie_n, scrn, t_seats, 0, 0);
-    storeData();
+    storeData();/*Storing data into JSON file */
 
-    while (!isEmpty())
-    {
-        struct node *temp = deleteFirst();
-    }
-
-    readData();
     printf("Data inserted\n");
     return 0;
 }
@@ -611,16 +620,3 @@ bool isEmpty()
 {
     return head == NULL;
 }
-
-// void freeList()
-// {
-//    struct node* tmp = head, *ptr;
-
-//    while (NULL != tmp)
-//     {
-//        ptr = tmp->next;
-//        free(tmp);
-//        tmp = ptr;
-//     }
-
-// }

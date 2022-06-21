@@ -23,7 +23,7 @@ void removeDuplicate();
 int adminWork();
 int resetAllSeats();
 int resetSeats();
-int getData();
+int addData();
 struct node* deleteFirst();
 bool isEmpty();
 

@@ -12,7 +12,7 @@ void line()
  */
 void setBlueColor()
 {
-    printf("\033[1;34m"); // switchign color to blue
+    printf("\033[1;34m"); // switching color to blue
 }
 /**
  * @brief Set the Default Color object
@@ -20,7 +20,7 @@ void setBlueColor()
  */
 void setDefaultColor()
 {
-    printf("\033[0m"); // switchign color to default
+    printf("\033[0m"); // switching color to default
 }
 /**
  * @brief Set the Red Color object
@@ -28,9 +28,9 @@ void setDefaultColor()
  */
 void setRedColor()
 {
-    printf("\033[1;31m"); // switchign color to red
+    printf("\033[1;31m"); // switching color to red
 }
 void setGreenColor()
 {
-    printf("\033[1;32m"); // switchign color to red
+    printf("\033[1;32m"); // switching color to red
 }
