@@ -26,13 +26,15 @@ int resetSeats();
 int addData();
 struct node* deleteFirst();
 bool isEmpty();
+void deleteAll();
+int deleteData();
 
+void logo();
 void line();
 void setBlueColor();
 void setDefaultColor();
 void setRedColor();
 void setGreenColor();
 
-int init();
 
 #endif //HEADER_H

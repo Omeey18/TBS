@@ -1,15 +1,5 @@
 [
     {
-        "moviename": "AAG",
-        "Screen": 2,
-        "t_seat": 10,
-        "show_seat": [
-            4,
-            5,
-            6
-        ]
-    },
-    {
         "moviename": "RRR",
         "Screen": 1,
         "t_seat": 30,
@@ -53,30 +43,6 @@
             10,
             15,
             24
-        ]
-    },
-    {
-        "moviename": "BHOOL BHULAIYAA",
-        "Screen": 4,
-        "t_seat": 30,
-        "show_seat": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            12
-        ]
-    },
-    {
-        "moviename": "BHOOL BHULAIYAA",
-        "Screen": 5,
-        "t_seat": 40,
-        "show_seat": [
-            36
         ]
     },
     {

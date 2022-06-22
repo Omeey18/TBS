@@ -123,7 +123,7 @@ void storeData()
 
     FILE *file;                      // file pointer
     file = fopen("data.json", "w+"); // opening json file
-    char buffer[READERSIZE];                    // store string data
+    char buffer[READERSIZE];         // store string data
 
     // Create an empty array : []
     json_object *jarray = json_object_new_array();
@@ -154,7 +154,7 @@ void storeData()
         ptr = ptr->next;
     }
     // storing json object into string variable
-    strcpy(buffer,json_object_to_json_string(jarray));
+    strcpy(buffer, json_object_to_json_string(jarray));
     // printf("%s",buffer);
     fprintf(file, "%s", buffer); // writing data into json file
     // fwrite(buffer,1024,1,file);
@@ -168,6 +168,10 @@ void storeData()
 void printList()
 {
     struct node *ptr = head;
+    if (ptr == NULL)
+    {
+        printf("No Data Found\n");
+    }
     // start from the beginning
     while (ptr != NULL)
     {
@@ -347,6 +351,7 @@ int display_seats(char *choosed_movie, int screen_no)
                     design_count = 0;
                 }
             }
+            printf("\n");
             setDefaultColor();
             flag = 1;
             if (ptr->seat.avail_seat <= 0)
@@ -461,7 +466,8 @@ int adminWork()
             // login successfully
             int admin_ch;
             line();
-            printf("[+] 1 for reset all seats data:\n[+] 2 for reset particular seats data:\n[+] 3 for print all data:\n[+] 4 for Add new Data:\n[+] 5 for exit:");
+            printf("[+] 1 for reset all seats data:\n[+] 2 for reset particular seats data:\n[+] 3 for print all data:\n[+] 4 for Add new Data:\n"
+                   "[+] 5 for delete all data:\n[+] 6 for delete particular data:\n[+] 7 for exit:");
             scanf("%d", &admin_ch);
             getchar();
             switch (admin_ch)
@@ -484,6 +490,16 @@ int adminWork()
                 addData();
                 break;
             case 5:
+                /* code */
+                printf("Deleting all data\n");
+                deleteAll();
+                break;
+            case 6:
+                /* code */
+                printf("Deleting particular data\n");
+                deleteData();
+                break;
+            case 7:
                 /* code */
                 setRedColor();
                 printf("Signing off from Admin pannel\n");
@@ -571,8 +587,8 @@ int resetSeats()
 
 /**
  * @brief add the Data object
- * 
- * @return int 
+ *
+ * @return int
  */
 int addData()
 {
@@ -589,13 +605,13 @@ int addData()
     scanf("%d", &t_seats);
 
     /* updating global variables */
-    strcpy(movies_name[total_movies],movie_n);
+    strcpy(movies_name[total_movies], movie_n);
     total_movies++;
-    removeDuplicate();/*removing duplicates movie name from global vari */
+    removeDuplicate(); /*removing duplicates movie name from global vari */
 
     /* inserting data into Linked List */
     insertFirst(movie_n, scrn, t_seats, 0, 0);
-    storeData();/*Storing data into JSON file */
+    storeData(); /*Storing data into JSON file */
 
     printf("Data inserted\n");
     return 0;
@@ -620,3 +636,77 @@ bool isEmpty()
 {
     return head == NULL;
 }
+
+void deleteAll()
+{
+    char check;
+    printf("Are you sure [Y/N]: ");
+    scanf("%c", &check);
+    if (check == 'y' || check == 'Y')
+    {
+        while (!isEmpty())
+        {
+            struct node *temp = deleteFirst();
+        }
+        printf("Delete all data successfully");
+    }
+}
+
+int deleteData()
+{
+    // start from the first link
+    struct node *current = head;
+    struct node *previous = NULL;
+
+    // if list is empty
+    if (head == NULL)
+    {
+        printf("No data...!\n");
+        return 0;
+    }
+
+    char *movie = printMovies();
+    int sn = 0, flag = 0;
+
+    printf("Enter Screen No: ");
+    scanf("%d", &sn);
+
+    while (current != NULL)
+    {
+        if (current->screen == sn && strcmp(current->movie_name, movie) == 0)
+        {
+            printf("DELETED DATA: %s: %d\n", current->movie_name, current->screen);
+            if (current == head)
+            {
+                head = head->next;
+                free(current);
+                flag=1;
+            }
+            else
+            {
+                previous->next = current->next;
+                free(current);
+                flag = 1;
+            }
+            break;
+        }
+
+        previous = current;
+        current = current->next;
+    }
+
+    if (flag == 0)
+    {
+        printf("Data not found\n");
+    }
+    else if (flag == 1)
+    {
+        storeData();
+        deleteAll();
+        readData();
+        printf("Data reset Successfully...!\n");
+    }
+    return 0;
+}
+
+

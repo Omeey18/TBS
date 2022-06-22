@@ -18,9 +18,11 @@
 /***************************************
  * MAIN FUNCTION
  ****************************************/
-int init()
-{
 
+int main()
+{
+    logo();
+    readData(); // reading data form json
     while (1)
     {
 
@@ -64,11 +66,5 @@ int init()
 
         // printList(); // print all data
     }
-}
-
-int main()
-{
-    readData(); // reading data form json
-    init();
     return 0;
 }
