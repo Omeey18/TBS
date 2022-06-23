@@ -176,7 +176,9 @@ void printList()
     while (ptr != NULL)
     {
         line();
+        setGreenColor();
         printf("\t\t\tMovie Name: \t%s\n", ptr->movie_name);
+        setDefaultColor();
         line();
         printf("\t\t\tScreen: \t%d\n", ptr->screen);
         printf("\t\t\tTotal Seats: \t%d\n\t\t\tAvail Seats: \t%d\n\t\t\tBooked Seats: \t%d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
@@ -400,7 +402,9 @@ int display_seats(char *choosed_movie, int screen_no)
                         else if (ptr->seat.show_seat[seat_no - 1] == 0)
                         {
                             j--;
+                            setRedColor();
                             printf("Seat already booked...!\n");
+                            setDefaultColor();
                         }
                     }
                 }
@@ -466,47 +470,39 @@ int adminWork()
             // login successfully
             int admin_ch;
             line();
-            printf("[+] 1 for reset all seats data:\n[+] 2 for reset particular seats data:\n[+] 3 for print all data:\n[+] 4 for Add new Data:\n"
-                   "[+] 5 for delete all data:\n[+] 6 for delete particular data:\n[+] 7 for exit:");
+            printf("[+] 1 for reset seats data:\n[+] 2 for print all data:\n[+] 3 for Add new Data:\n"
+                   "[+] 4 for delete data:\n[+] 5 for exit:");
             scanf("%d", &admin_ch);
             getchar();
             switch (admin_ch)
             {
             case 1:
                 /* code */
-                resetAllSeats();
+                resetSeats();
                 break;
             case 2:
                 /* code */
-                resetSeats();
-                break;
-            case 3:
-                /* code */
                 printList();
                 break;
-            case 4:
+            case 3:
                 /* code */
                 printf("Adding new data\n");
                 addData();
                 break;
+            case 4:
+                /* code */
+                delete ();
+                break;
             case 5:
-                /* code */
-                printf("Deleting all data\n");
-                deleteAll();
-                break;
-            case 6:
-                /* code */
-                printf("Deleting particular data\n");
-                deleteData();
-                break;
-            case 7:
                 /* code */
                 setRedColor();
                 printf("Signing off from Admin pannel\n");
                 setDefaultColor();
                 return 0;
             default:
+                setRedColor();
                 printf("Wrong choice...!");
+                setDefaultColor();
                 break;
             }
         }
@@ -522,12 +518,37 @@ int adminWork()
     return 0;
 }
 
+void resetSeats()
+{
+    int admin_ch;
+    line();
+    printf("[+] 1 for reset all seats data:\n[+] 2 for reset particular seats data: ");
+    scanf("%d", &admin_ch);
+    getchar();
+    switch (admin_ch)
+    {
+    case 1:
+        /* code */
+        resetAllSeats();
+        break;
+    case 2:
+        /* code */
+        resetOneMovieSeats();
+        break;
+    default:
+        setRedColor();
+        printf("Wrong choice\n");
+        setDefaultColor();
+        break;
+    }
+}
+
 /**
  * @brief it will reset all seats of all movies
  *
  * @return int
  */
-int resetAllSeats()
+void resetAllSeats()
 {
     struct node *ptr = head;
     // start from the beginning
@@ -542,7 +563,9 @@ int resetAllSeats()
         }
         ptr = ptr->next;
     }
-    printf("Data reset Successfully...!\n");
+    setGreenColor();
+    printf("Data reset Successfully!\n");
+    setDefaultColor();
 }
 
 /**
@@ -551,7 +574,7 @@ int resetAllSeats()
  *
  * @return int
  */
-int resetSeats()
+void resetOneMovieSeats()
 {
     struct node *ptr = head;
     char *movie = printMovies();
@@ -577,11 +600,15 @@ int resetSeats()
 
     if (flag == 0)
     {
+        setRedColor();
         printf("Data not found\n");
+        setDefaultColor();
     }
     else if (flag == 1)
     {
+        setGreenColor();
         printf("Data reset Successfully...!\n");
+        setDefaultColor();
     }
 }
 
@@ -594,7 +621,7 @@ int addData()
 {
     /* local temp variables */
     char movie_n[C_SIZE];
-    int scrn, t_seats, t_booked;
+    int scrn, t_seats;
 
     /* geting values from user*/
     printf("Enter new movie name: ");
@@ -612,8 +639,9 @@ int addData()
     /* inserting data into Linked List */
     insertFirst(movie_n, scrn, t_seats, 0, 0);
     storeData(); /*Storing data into JSON file */
-
+    setGreenColor();
     printf("Data inserted\n");
+    setDefaultColor();
     return 0;
 }
 
@@ -639,20 +667,16 @@ bool isEmpty()
 
 void deleteAll()
 {
-    char check;
-    printf("Are you sure [Y/N]: ");
-    scanf("%c", &check);
-    if (check == 'y' || check == 'Y')
+    while (!isEmpty())
     {
-        while (!isEmpty())
-        {
-            struct node *temp = deleteFirst();
-        }
-        printf("Delete all data successfully");
+        deleteFirst();
     }
+    setGreenColor();
+    printf("Delete Data Successfully...!\n");
+    setDefaultColor();
 }
 
-int deleteData()
+int deleteOneData()
 {
     // start from the first link
     struct node *current = head;
@@ -661,7 +685,9 @@ int deleteData()
     // if list is empty
     if (head == NULL)
     {
+        setRedColor();
         printf("No data...!\n");
+        setDefaultColor();
         return 0;
     }
 
@@ -680,7 +706,7 @@ int deleteData()
             {
                 head = head->next;
                 free(current);
-                flag=1;
+                flag = 1;
             }
             else
             {
@@ -697,16 +723,39 @@ int deleteData()
 
     if (flag == 0)
     {
+        setRedColor();
         printf("Data not found\n");
+        setDefaultColor();
     }
     else if (flag == 1)
     {
         storeData();
         deleteAll();
         readData();
+        setGreenColor();
         printf("Data reset Successfully...!\n");
+        setDefaultColor();
     }
     return 0;
 }
 
-
+void delete ()
+{
+    int choice;
+    line();
+    printf("[+] 1 for delete all data:\n[+] 2 for delete one data: ");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        /* code */
+        deleteAll();
+        break;
+    case 2:
+        /* code */
+        deleteOneData();
+        break;
+    default:
+        break;
+    }
+}

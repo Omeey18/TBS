@@ -21,13 +21,15 @@ void printScreen(char *choosed_movie);
 int display_seats(char *choosed_movie, int screen_no);
 void removeDuplicate();
 int adminWork();
-int resetAllSeats();
-int resetSeats();
+void resetAllSeats();
+void resetSeats();
+void resetOneMovieSeats();
 int addData();
 struct node* deleteFirst();
 bool isEmpty();
 void deleteAll();
-int deleteData();
+int deleteOneData();
+void delete();
 
 void logo();
 void line();

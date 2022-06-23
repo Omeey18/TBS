@@ -4,89 +4,49 @@ make: *** No rule to make target 'all'.  Stop.
 # GNU Make 4.1
  
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2014 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Wed Jun 22 11:52:33 2022
- 
+# Make data base, printed on Thu Jun 23 15:25:32 2022
 
 # Variables
- 
 
- 
 # 'override' directive
- 
 GNUMAKEFLAGS := 
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
- 
 ?F = $(notdir $?)
- 
 # environment
- 
 DESKTOP_SESSION = ubuntu
- 
 # default
- 
 .SHELLFLAGS := -c
- 
 # environment
- 
 XDG_SESSION_TYPE = x11
- 
 # environment
- 
 VSCODE_LOG_NATIVE = false
- 
 # automatic
- 
 ?D = $(patsubst %/,%,$(dir $?))
- 
 # automatic
- 
 @D = $(patsubst %/,%,$(dir $@))
- 
 # environment
- 
 XAUTHORITY = /run/user/1000/gdm/Xauthority
- 
 # environment
- 
 GDMSESSION = ubuntu
- 
 # environment
- 
 XMODIFIERS = @im=ibus
- 
 # makefile
- 
 CURDIR := /home/ompatel/TBS
- 
 # makefile
- 
 SHELL = /bin/sh
- 
 # environment
- 
 VTE_VERSION = 5202
- 
 # environment
- 
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 9:25263
+JOURNAL_STREAM = 9:25211
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile
@@ -102,13 +62,13 @@ MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=d8d6f12dcaa0fd56aa315f4062b29fc9
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=3cc004487254ba275ff96d9f62b3ee37
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /usr/bin/code
 # environment
-MANAGERPID = 1242
+MANAGERPID = 1212
 # environment
 CLUTTER_IM_MODULE = xim
 # environment
@@ -122,7 +82,7 @@ PATH = /home/ompatel/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bi
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Omeey:@/tmp/.ICE-unix/7550,unix/Omeey:/tmp/.ICE-unix/7550
+SESSION_MANAGER = local/Omeey:@/tmp/.ICE-unix/1243,unix/Omeey:/tmp/.ICE-unix/1243
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -134,7 +94,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = a9d7c6300c7a414bb1635a85770e21f3
+INVOCATION_ID = 63cb9d2416344437acceae1f0f6acddc
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -156,7 +116,7 @@ PWD = /home/ompatel/TBS
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 1403
+SSH_AGENT_PID = 1379
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -186,7 +146,7 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-XDG_VTNR = 2
+XDG_VTNR = 1
 # environment
 MAKELEVEL := 0
 # environment
@@ -202,9 +162,9 @@ SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5063b80c-e5a8-43c9-b192-938b4ca70883.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ad0f7f4c-38d9-4ddb-9459-18833b7585f6.sock
 # environment
-XDG_SESSION_ID = 5
+XDG_SESSION_ID = 1
 # environment
 USER = ompatel
 # makefile
@@ -252,17 +212,17 @@ DBUS_STARTER_BUS_TYPE = session
 # environment
 QT4_IM_MODULE = xim
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/974ebee2_be54_4333_b78b_87112539cea3
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/e4db5c02_6352_45e2_9bc1_dafa6bb189b4
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.711
+GNOME_TERMINAL_SERVICE = :1.497
 # default
 SUFFIXES := 
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
-WINDOWPATH = 2
+WINDOWPATH = 1
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # default
@@ -272,9 +232,9 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 8196
+VSCODE_PID = 4914
 # environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=d8d6f12dcaa0fd56aa315f4062b29fc9
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=3cc004487254ba275ff96d9f62b3ee37
 # variable set hash-table stats:
 # Load=111/1024=11%, Rehash=0, Collisions=16/133=12%
 
@@ -321,6 +281,7 @@ makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 # Not a target:
 GNUmakefile:
 #  Implicit rule search has been done.
@@ -329,6 +290,7 @@ GNUmakefile:
 #  Failed to be updated.
 
 # files hash-table stats:
+ 
 # Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
 # VPATH Search Paths
 
@@ -342,6 +304,6 @@ GNUmakefile:
 # strcache performance: lookups = 19 / hit rate = 15%
 # hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Wed Jun 22 11:52:33 2022
+# Finished Make data base on Thu Jun 23 15:25:32 2022
 
  
