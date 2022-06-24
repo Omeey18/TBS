@@ -39,17 +39,26 @@ int main()
         // admin pannel
         case 1:
             /* code */
-            printf("YOu are in admin panel\n");
+            printf("You are in admin panel\n");
             adminWork();
             break;
 
         // user pannel
         case 2:
             /* code */
-            printf("YOu are in user panel\n");
-            char movie[C_SIZE] = {};
-            strcpy(movie, printMovies()); // print all movie name
-            printScreen(movie);
+            printf("You are in user panel\n");
+            if (total_movies > 0)
+            {
+                char movie[C_SIZE] = {};
+                strcpy(movie, printMovies()); // print all movie name
+                printScreen(movie);
+            }
+            else
+            {
+                setRedColor();
+                printf("No movie found\n");
+                setDefaultColor();
+            }
             break;
 
         // exit form code

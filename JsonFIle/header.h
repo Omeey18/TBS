@@ -8,11 +8,18 @@
 #define C_SIZE 30
 #define READERSIZE 5024
 
+
+/***************************************
+ * GLOBAL VARIABLES
+ ****************************************/
+int total_movies;
+char movies_name[C_SIZE][C_SIZE];
+
 /***************************************
 * FUNCTION DECLARATION
 ****************************************/
 /*function declaration.*/
-void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[],int n_booked);
+void insertFirst(char *movie_name, int screen, int price, int total_seats, int seats_index[],int n_booked);
 void printList();
 void storeData();
 void readData();

@@ -8,11 +8,6 @@
 #include <stdbool.h>
 #include "header.h"
 
-/***************************************
- * GLOBAL VARIABLES
- ****************************************/
-int total_movies;
-char movies_name[C_SIZE][C_SIZE];
 
 /**
  * @brief LINKEDLIST NODE
@@ -22,6 +17,7 @@ struct node
 {
     char movie_name[C_SIZE];
     int screen;
+    int price;
     // struct seats *seat;
     struct seats
     {
@@ -53,13 +49,14 @@ void readData()
     char buffer[READERSIZE]; // buffer
     // data for linked list
     char movie[C_SIZE];
-    int scrn, Tseat, *seat_index;
+    int scrn, pri, Tseat, *seat_index;
 
     // json parsing
     // declare all json objects
     struct json_object *parsed_json;
     struct json_object *movie_name;
     struct json_object *screen;
+    struct json_object *price;
     struct json_object *t_seat;
     struct json_object *show_seats;
     struct json_object *seat_count;
@@ -82,6 +79,7 @@ void readData()
         // reading data with its key and store in respective object
         json_object_object_get_ex(data, "moviename", &movie_name);
         json_object_object_get_ex(data, "Screen", &screen);
+        json_object_object_get_ex(data, "Price", &price);
         json_object_object_get_ex(data, "t_seat", &t_seat);
         json_object_object_get_ex(data, "show_seat", &show_seats);
 
@@ -97,6 +95,7 @@ void readData()
         strcpy(movie, json_object_get_string(movie_name));
         strcpy(movies_name[i], movie); // storing data into global variable
         scrn = json_object_get_int(screen);
+        pri = json_object_get_int(price);
         Tseat = json_object_get_int(t_seat);
 
         // prints seat index
@@ -107,7 +106,7 @@ void readData()
         //  printf("\n");
 
         // push all data into linked list
-        insertFirst(movie, scrn, Tseat, seat_index, n_seats);
+        insertFirst(movie, scrn, pri, Tseat, seat_index, n_seats);
     }
     removeDuplicate();
 }
@@ -137,6 +136,7 @@ void storeData()
         // storing data into json object
         json_object_object_add(parsed_json, "moviename", json_object_new_string(ptr->movie_name));
         json_object_object_add(parsed_json, "Screen", json_object_new_int(ptr->screen));
+        json_object_object_add(parsed_json, "Price", json_object_new_int(ptr->price));
         json_object_object_add(parsed_json, "t_seat", json_object_new_int(ptr->seat.total_seat));
 
         // storing booked seats index
@@ -170,7 +170,9 @@ void printList()
     struct node *ptr = head;
     if (ptr == NULL)
     {
+        setRedColor();
         printf("No Data Found\n");
+        setDefaultColor();
     }
     // start from the beginning
     while (ptr != NULL)
@@ -181,6 +183,7 @@ void printList()
         setDefaultColor();
         line();
         printf("\t\t\tScreen: \t%d\n", ptr->screen);
+        printf("\t\t\tPrice: \t\t%d\n", ptr->price);
         printf("\t\t\tTotal Seats: \t%d\n\t\t\tAvail Seats: \t%d\n\t\t\tBooked Seats: \t%d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
 
         // print showsheet
@@ -210,12 +213,13 @@ void printList()
  * @param seats_index
  * @param n_booked
  */
-void insertFirst(char *movie_name, int screen, int total_seats, int seats_index[], int n_booked)
+void insertFirst(char *movie_name, int screen, int price, int total_seats, int seats_index[], int n_booked)
 {
     // create a link
     struct node *link = (struct node *)malloc(sizeof(struct node));
     strcpy(link->movie_name, movie_name);
     link->screen = screen;
+    link->price = price;
     link->seat.avail_seat = total_seats - n_booked;
     link->seat.total_seat = total_seats;
     link->seat.booked_seat = n_booked;
@@ -275,8 +279,7 @@ char *printMovies()
     }
     else
     {
-        printf("No Movies available\n");
-        return 0;
+        return NULL;
     }
     // printf("Choosed Movie is: %s\n",choosed_movie);
     return *choosed_movie;
@@ -298,6 +301,7 @@ void printScreen(char *choosed_movie)
         {
             line();
             printf("Screen No.: %d\n", ptr->screen);
+            printf("Price: %d\n", ptr->price);
             printf("Total Seats: %d\nAvailable Seats: %d\nBooked Seats: %d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
         }
 
@@ -331,6 +335,7 @@ int display_seats(char *choosed_movie, int screen_no)
         if (strcmp(choosed_movie, ptr->movie_name) == 0 && screen_no == ptr->screen)
         {
             printf("Screen: %d\n", ptr->screen);
+            printf("Price: %d\n", ptr->price);
             printf("Total Seats: %d\nAvailable Seats: %d\nBooked Seats: %d\n", ptr->seat.total_seat, ptr->seat.avail_seat, ptr->seat.booked_seat);
             line();
             printf("\n");
@@ -361,7 +366,7 @@ int display_seats(char *choosed_movie, int screen_no)
                 printf("No Seat available...!\n");
                 return 0;
             }
-            int no_tickets_book = 0, seat_no = 0;
+            int no_tickets_book = 0, user_bill = 0;
 
             // ask to book tickets
             printf("DO want to book seats [Y/N]:");
@@ -380,32 +385,73 @@ int display_seats(char *choosed_movie, int screen_no)
                 }
                 else
                 {
+                    int *user_seats = (int *)malloc(sizeof(int) * no_tickets_book);
                     for (int j = 0; j < no_tickets_book; j++)
                     {
                         printf("Write seat no: \n");
-                        scanf("%d", &seat_no);
+                        scanf("%d", &user_seats[j]);
 
-                        if (ptr->seat.total_seat < seat_no)
+                        if (ptr->seat.total_seat < user_seats[j])
                         {
                             j--;
                             printf("Seat not found...!\n");
                         }
-                        else if (ptr->seat.show_seat[seat_no - 1] != 0)
+                        else if (ptr->seat.show_seat[user_seats[j] - 1] != 0)
                         {
-                            ptr->seat.show_seat[seat_no - 1] = 0;
                             setGreenColor();
-                            printf("Ticket Successfully booked...!\n");
+                            printf("Seat Available\n");
+                            ptr->seat.show_seat[user_seats[j] - 1] = 0;
                             ptr->seat.avail_seat--;
                             ptr->seat.booked_seat++;
+                            /* User bill increment by 20 after every 10 seats*/
+                            user_bill = user_bill + ptr->price + ((user_seats[j] / 10) * 20);
                             setDefaultColor();
                         }
-                        else if (ptr->seat.show_seat[seat_no - 1] == 0)
+                        else if (ptr->seat.show_seat[user_seats[j] - 1] == 0)
                         {
                             j--;
                             setRedColor();
-                            printf("Seat already booked...!\n");
+                            printf("Seat Unavailable\nTry New Seat\n");
                             setDefaultColor();
                         }
+                    }
+                    char purchase_choice;
+                    int flag = 0;
+                    line();
+                    setBlueColor();
+                    printf("Your bill amount is:");
+                    setGreenColor();
+                    printf("_____[%d]RS ONLY_____\n", user_bill);
+                    setDefaultColor();
+                    line();
+                    printf("Are sure you want to book seats[Y/N]: ");
+                    scanf(" %c", &purchase_choice);
+                    if (purchase_choice == 'Y' || purchase_choice == 'y')
+                    {
+                        flag = 1; /* set flag for successfully purchase tickets */
+                    }
+                    else
+                    {
+                        for (int j = 0; j < no_tickets_book; j++)
+                        {
+                            ptr->seat.show_seat[user_seats[j] - 1] = user_seats[j];
+                            ptr->seat.avail_seat++;
+                            ptr->seat.booked_seat--;
+                        }
+                        printf("Comeback Soon\n");
+                    }
+                    /* check seats are booked or not*/
+                    if (flag == 1)
+                    {
+                        setGreenColor();
+                        printf("Seats books Successfully\nPurchased Success\n");
+                        setDefaultColor();
+                    }
+                    else
+                    {
+                        setRedColor();
+                        printf("Purchesed failed\n");
+                        setDefaultColor();
                     }
                 }
             }
@@ -419,7 +465,9 @@ int display_seats(char *choosed_movie, int screen_no)
     printf("\n");
     if (flag == 0)
     {
+        setRedColor();
         printf("No screen found...!\n");
+        setDefaultColor();
     }
     return 0;
 }
@@ -621,13 +669,15 @@ int addData()
 {
     /* local temp variables */
     char movie_n[C_SIZE];
-    int scrn, t_seats;
+    int scrn, pri, t_seats;
 
     /* geting values from user*/
     printf("Enter new movie name: ");
     scanf(" %[^\n]s", movie_n);
     printf("Enter screen no: ");
     scanf("%d", &scrn);
+    printf("Enter price per seat: ");
+    scanf("%d", &pri);
     printf("Enter total seats: ");
     scanf("%d", &t_seats);
 
@@ -637,7 +687,7 @@ int addData()
     removeDuplicate(); /*removing duplicates movie name from global vari */
 
     /* inserting data into Linked List */
-    insertFirst(movie_n, scrn, t_seats, 0, 0);
+    insertFirst(movie_n, scrn, pri, t_seats, 0, 0);
     storeData(); /*Storing data into JSON file */
     setGreenColor();
     printf("Data inserted\n");
@@ -671,6 +721,15 @@ void deleteAll()
     {
         deleteFirst();
     }
+
+    /* deleting all data of movies_name variable*/
+    for (int i = 0; i < total_movies; i++)
+    {
+
+        memmove(movies_name[i], "", sizeof(movies_name[0]));
+        --total_movies;
+    }
+    total_movies =0;
     setGreenColor();
     printf("Delete Data Successfully...!\n");
     setDefaultColor();
